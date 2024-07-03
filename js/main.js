@@ -3,51 +3,46 @@ const toggleMode = document.getElementById("toggle-mode");
 const container = document.querySelector(".container");
 
 // Toggling event-i dinləyici əlavə edirik
-toggleMode.addEventListener("change", function () {
-  container.classList.toggle("dark-mode");
-});
-
-// Klaviatura düyməsi basıldığında işləyəcək funksiya əlavə edirik
-document.addEventListener("keydown", function (event) {
-  handleKeyPress(event.key);
+toggleMode.addEventListener("change", () => {
+  container.classList.toggle("dark-mode"); // (yəni dark mode aktiv/inaktiv edilir).
 });
 
 // Bu funksiya klaviatura düymələrinin basılmasını idarə edir
-function handleKeyPress(key) {
-  // "Enter" düyməsi basıldığında "=" düyməsini basırıq
-  if (key === "Enter") handleButtonPress("=");
-  // "Delete" və ya "Backspace" düyməsi basıldığında "CE" düyməsini basırıq
-  if (key === "Delete" || key === "Backspace") handleButtonPress("CE");
-  // Rəqəm düyməsi basıldığında müvafiq rəqəm düyməsini basırıq
+const handleKeyPress = (key) => {
   if (/[0-9]/.test(key)) handleButtonPress(key);
-  // Operator düyməsi basıldığında (+, -, *, /, %), müvafiq operator düyməsini basırıq
   if (/[\+\-\*\/%]/.test(key)) handleButtonPress(key);
-}
+};
 
 // Bu funksiya verilən dəyər üçün kalkulyator düyməsini basmağı simulyasiya edir
-function handleButtonPress(value) {
-  // Verilən dəyərə əsasən müvafiq düymə elementini tapırıq
+const handleButtonPress = (value) => {
+  // Bu value, basılmaq istənilən kalkulyator düyməsinin üzərində yazılmış dəyərdir.
+
   const button = Array.from(document.querySelectorAll("button")).find(
-    (btn) => btn.innerText === value
+    //array-də dövr edir və innerText (düymənin üzərindəki mətn) dəyəri verilən value ilə eyni olan ilk düyməni tapır.
+    //find metodu tapılan ilk uyğun elementi qaytarır. Əgər uyğun element tapılmasa, undefined qaytarır.
+    (btn) => btn.innerText === value //
   );
   if (button) button.click();
-}
+  //Əgər find metodu uyğun bir düymə taparsa (button dəyişəni undefined deyil), bu düymənin click metodunu çağırır.
+};
 
 // "C" düyməsi üçün hamısını təmizləyən funksiya
-function clearAll() {
+const clearAll = () => {
   document.getElementById("answer").value = "";
-}
+};
 
 // "CE" düyməsi üçün son girişi silən funksiya
-function deleteLastEntry() {
+const deleteLastEntry = () => {
   const answer = document.getElementById("answer");
   answer.value = answer.value.slice(0, -1);
-}
+};
 
 // Düymələrə funksionallıq əlavə edirik
 document.querySelectorAll("button").forEach((button) => {
-  button.addEventListener("click", function () {
-    const value = this.innerText;
+  // button elementlərini seçir və onları bir NodeList şəklində qaytarır.
+  //.forEach((button) => { ... }) metodu ilə bu düymələrin hər birinə funksionallıq əlavə edirik.
+  button.addEventListener("click", () => {
+    const value = button.innerText; // düymənin üzərində yazılan mətn (dəyər) alınır.
     const answer = document.getElementById("answer");
 
     if (value === "C") {
@@ -57,7 +52,8 @@ document.querySelectorAll("button").forEach((button) => {
     } else if (value === "=") {
       try {
         // Hesablama aparmaq üçün eval funksiyasından istifadə edirik
-        answer.value = eval(answer.value.replace("X", "*"));
+        const expression = answer.value.replace("X", "*").replace("%", "/100");
+        answer.value = eval(expression);
       } catch {
         answer.value = "Error"; // Xəta baş verərsə, "Error" yazdırırıq
       }

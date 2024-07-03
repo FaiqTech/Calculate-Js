@@ -160,7 +160,6 @@ button:active {
   background-color: #1abc9c;
 }
 
-/* Dark modda "CALCULATOR" yazısını ağ rəngə çevirmək */
 .dark-mode .title {
   color: #fff;
 }
