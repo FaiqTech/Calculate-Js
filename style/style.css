@@ -1,4 +1,4 @@
-/* General Reset */
+/* Ümumi Reset */
 body,
 h1,
 div,
@@ -29,12 +29,6 @@ body {
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
-}
-
-.toggle-container {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
 }
 
 .toggle-switch {
@@ -137,18 +131,6 @@ button:active {
   color: #ecf0f1;
 }
 
-.divider {
-  max-width: 50vw;
-  border: 0;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0)
-  );
-}
-
 .dark-mode {
   background-color: #333;
   color: #fff;
@@ -176,4 +158,9 @@ button:active {
 
 .dark-mode .equals {
   background-color: #1abc9c;
+}
+
+/* Dark modda "CALCULATOR" yazısını ağ rəngə çevirmək */
+.dark-mode .title {
+  color: #fff;
 }

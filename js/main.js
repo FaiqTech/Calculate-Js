@@ -1,11 +1,3 @@
-// Google Analytics kodu üçün
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-  dataLayer.push(arguments);
-}
-gtag("js", new Date());
-gtag("config", "UA-70447982-5");
-
 // Toggling üçün "checkbox" və konteyneri tapırıq
 const toggleMode = document.getElementById("toggle-mode");
 const container = document.querySelector(".container");
@@ -23,30 +15,22 @@ document.addEventListener("keydown", function (event) {
 // Bu funksiya klaviatura düymələrinin basılmasını idarə edir
 function handleKeyPress(key) {
   // "Enter" düyməsi basıldığında "=" düyməsini basırıq
-  if (key === "Enter") {
-    handleButtonPress("=");
-  }
+  if (key === "Enter") handleButtonPress("=");
   // "Delete" və ya "Backspace" düyməsi basıldığında "CE" düyməsini basırıq
-  if (key === "Delete" || key === "Backspace") {
-    handleButtonPress("CE");
-  }
+  if (key === "Delete" || key === "Backspace") handleButtonPress("CE");
   // Rəqəm düyməsi basıldığında müvafiq rəqəm düyməsini basırıq
-  if (/[0-9]/.test(key)) {
-    handleButtonPress(key);
-  }
+  if (/[0-9]/.test(key)) handleButtonPress(key);
   // Operator düyməsi basıldığında (+, -, *, /, %), müvafiq operator düyməsini basırıq
-  if (/[\+\-\*\/%]/.test(key)) {
-    handleButtonPress(key);
-  }
+  if (/[\+\-\*\/%]/.test(key)) handleButtonPress(key);
 }
 
 // Bu funksiya verilən dəyər üçün kalkulyator düyməsini basmağı simulyasiya edir
 function handleButtonPress(value) {
   // Verilən dəyərə əsasən müvafiq düymə elementini tapırıq
-  const button = document.querySelector(`button[value="${value}"]`);
-  if (button) {
-    button.click();
-  }
+  const button = Array.from(document.querySelectorAll("button")).find(
+    (btn) => btn.innerText === value
+  );
+  if (button) button.click();
 }
 
 // "C" düyməsi üçün hamısını təmizləyən funksiya

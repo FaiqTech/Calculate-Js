@@ -9,16 +9,14 @@
   <body>
     <div class="container">
       <h1>
-        <div class="toggle-container">
-          <label class="toggle-switch">
-            <input type="checkbox" id="toggle-mode" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-mode" />
+          <span class="toggle-slider"></span>
+        </label>
         <a class="title" onclick="location.reload();">CALCULATOR</a>
       </h1>
       <div class="calculator">
-        <input type="text" name="screen" id="answer" readonly />
+        <input type="text" id="answer" readonly />
         <table>
           <tr>
             <td><button>(</button></td>
@@ -52,12 +50,8 @@
             <td><button class="equals">=</button></td>
           </tr>
         </table>
-        <hr class="divider" />
       </div>
     </div>
-    <div id="bar1" class="bars"></div>
-    <div id="bar2" class="bars"></div>
-    <div id="history"></div>
     <script src="./js/main.js"></script>
   </body>
 </html>
